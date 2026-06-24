@@ -477,7 +477,22 @@ export default function App() {
                     <span className="w-3 h-3 rounded-full bg-yellow-500"></span>
                     <span className="w-3 h-3 rounded-full bg-green-500"></span>
                   </div>
-                  <span className="font-mono text-xs text-slate-400">WASSCE_TRACKER.SYS</span>
+                  <span className="font-mono text-xs text-slate-400">EXCELLENCE_PORTAL</span>
+                </div>
+
+                {/* Hero Tuition Image with Overlay */}
+                <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-lg h-48 sm:h-52">
+                  <img 
+                    src="/src/assets/images/hero_tuition_1782316055936.jpg" 
+                    alt="Premium 1-on-1 home tuition session in Ghana" 
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent"></div>
+                  <div className="absolute bottom-3 left-3 flex items-center space-x-1.5 bg-accent text-primary font-bold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded shadow-md">
+                    <Users className="w-3.5 h-3.5" />
+                    <span>Live 1-on-1 Session</span>
+                  </div>
                 </div>
 
                 <div className="space-y-4">
@@ -919,6 +934,42 @@ export default function App() {
             </div>
 
           </div>
+
+          {/* Study Resources Banner */}
+          <div className="mt-16 bg-white rounded-2xl border border-slate-100 shadow-md overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch">
+            <div className="lg:col-span-7 p-8 sm:p-12 space-y-6 flex flex-col justify-center">
+              <div className="inline-flex items-center space-x-2 bg-amber-50 text-accent-hover text-xs font-bold px-3 py-1.5 rounded-full border border-amber-100 w-fit">
+                <BrainCircuit className="w-4 h-4 text-accent" />
+                <span>Premium Academic Resources Included</span>
+              </div>
+              <h4 className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Durable Past Questions (PASCO) & Formula Vaults
+              </h4>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Every student receives full-time access to our exclusive, compiled archives of Core Math, Elective Math, and Physics past questions from 1993 to date, accompanied by standardized step-by-step solutions that examiners reward with maximum scores.
+              </p>
+              <div className="flex flex-wrap gap-3 text-xs font-semibold text-slate-700 pt-2">
+                <span className="bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#25D366]" /> 30+ Years of PASCO Banks
+                </span>
+                <span className="bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#25D366]" /> Formula Memory Cards
+                </span>
+                <span className="bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#25D366]" /> Chief Examiner's Rubrics
+                </span>
+              </div>
+            </div>
+            <div className="lg:col-span-5 relative min-h-[250px] lg:min-h-0">
+              <img 
+                src="/src/assets/images/study_setup_1782316088675.jpg" 
+                alt="Mathematics and Physics Study Setup" 
+                className="absolute inset-0 w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -943,9 +994,24 @@ export default function App() {
                 Schools have overcrowded classrooms. Teachers are pressed for time and cannot slow down to focus on your specific child's knowledge gaps. That is where my specialized, custom home tuition bridges the gap.
               </p>
               
-              <div className="pt-4">
+              {/* Instructor Profile Card */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex items-center space-x-4 shadow-sm">
+                <img 
+                  src="/src/assets/images/tutor_avatar_1782316073583.jpg" 
+                  alt="Mr. Michael Tagbor - Senior SHS Math & Physics Tutor" 
+                  className="w-16 h-16 rounded-full object-cover border-2 border-primary shadow-sm"
+                  referrerPolicy="no-referrer"
+                />
+                <div>
+                  <h4 className="font-display font-bold text-slate-900 leading-tight">Mr. Michael Tagbor</h4>
+                  <p className="text-xs text-primary font-semibold uppercase tracking-wider mt-0.5">Senior Specialist Tutor</p>
+                  <p className="text-xs text-slate-500">B.Sc. Mathematics & Physics Specialist</p>
+                </div>
+              </div>
+              
+              <div className="pt-2">
                 <div className="flex items-center space-x-4">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-accent/20 text-accent font-bold text-lg">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-accent/20 text-accent font-bold text-lg shrink-0">
                     10+
                   </div>
                   <div>
