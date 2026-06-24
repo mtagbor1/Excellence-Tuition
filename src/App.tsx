@@ -29,6 +29,10 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
+import heroTuition from "./assets/images/hero_tuition_1782316055936.jpg";
+import tutorAvatar from "./assets/images/tutor_avatar_1782316073583.jpg";
+import studySetup from "./assets/images/study_setup_1782316088675.jpg";
+
 // Definitions of types
 interface Booking {
   id: string;
@@ -483,7 +487,7 @@ export default function App() {
                 {/* Hero Tuition Image with Overlay */}
                 <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-lg h-48 sm:h-52">
                   <img 
-                    src="/src/assets/images/hero_tuition_1782316055936.jpg" 
+                    src={heroTuition} 
                     alt="Premium 1-on-1 home tuition session in Ghana" 
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
@@ -962,7 +966,7 @@ export default function App() {
             </div>
             <div className="lg:col-span-5 relative min-h-[250px] lg:min-h-0">
               <img 
-                src="/src/assets/images/study_setup_1782316088675.jpg" 
+                src={studySetup} 
                 alt="Mathematics and Physics Study Setup" 
                 className="absolute inset-0 w-full h-full object-cover"
                 referrerPolicy="no-referrer"
@@ -997,7 +1001,7 @@ export default function App() {
               {/* Instructor Profile Card */}
               <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex items-center space-x-4 shadow-sm">
                 <img 
-                  src="/src/assets/images/tutor_avatar_1782316073583.jpg" 
+                  src={tutorAvatar} 
                   alt="Mr. Michael Tagbor - Senior SHS Math & Physics Tutor" 
                   className="w-16 h-16 rounded-full object-cover border-2 border-primary shadow-sm"
                   referrerPolicy="no-referrer"
