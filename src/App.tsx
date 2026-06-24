@@ -1339,10 +1339,13 @@ export default function App() {
                     <MapPin className="w-5 h-5 text-accent" />
                   </div>
                   <div className="flex-1">
-                    <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Geographic Coverage Zones</h5>
-                    <strong className="text-slate-900 text-sm font-bold block mt-1">Accra & Tema Metropolitan Regions, Ghana</strong>
-                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                      Active home visits to: East Legon, Cantonments, Airport Residential, Labone, Spintex, Osu, Roman Ridge, Dzorwulu, Tema Community 1-25, Lashibi, Sakumono, Adenta, GIMPA area.
+                    <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Physical Address / Office</h5>
+                    <strong className="text-slate-900 text-sm font-bold block mt-1">E3-212-1538, Greenhill Avenue</strong>
+                    <p className="text-xs text-slate-700 mt-1 leading-relaxed">
+                      Springfield Community, Peduase, Ghana
+                    </p>
+                    <p className="text-[11px] text-slate-500 mt-1">
+                      Serving Accra, Tema, and surrounding elite residential zones with direct home tuition delivery.
                     </p>
                   </div>
                 </div>
@@ -1652,9 +1655,9 @@ export default function App() {
                   <Globe className="w-4 h-4 text-accent shrink-0" />
                   <a href="https://wasscehometuition.netlify.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">wasscehometuition.netlify.app</a>
                 </li>
-                <li className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-accent shrink-0" />
-                  <span>Accra & Tema, Ghana</span>
+                <li className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                  <span className="leading-tight">E3-212-1538, Greenhill Avenue, Springfield Community, Peduase, Ghana</span>
                 </li>
               </ul>
             </div>
