@@ -24,7 +24,8 @@ import {
   Users,
   BrainCircuit,
   BookmarkCheck,
-  PhoneCall
+  PhoneCall,
+  Globe
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -1318,6 +1319,20 @@ export default function App() {
                   </div>
                 </div>
 
+                {/* Official Website Card */}
+                <div className="bg-slate-50 p-5 rounded-xl border border-slate-100 flex items-start space-x-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white shrink-0 shadow-md">
+                    <Globe className="w-5 h-5 text-accent" />
+                  </div>
+                  <div className="flex-1">
+                    <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Official Website</h5>
+                    <a href="https://wasscehometuition.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-slate-900 font-extrabold text-lg hover:text-primary transition block mt-1" id="website-link">
+                      wasscehometuition.netlify.app
+                    </a>
+                    <p className="text-xs text-slate-500 mt-0.5">Visit our official portal for updates and revision materials</p>
+                  </div>
+                </div>
+
                 {/* Location coverage card */}
                 <div className="bg-slate-50 p-5 rounded-xl border border-slate-100 flex items-start space-x-4">
                   <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white shrink-0 shadow-md">
@@ -1632,6 +1647,10 @@ export default function App() {
                 <li className="flex items-center gap-2">
                   <Send className="w-4 h-4 text-accent shrink-0" />
                   <a href="mailto:mtagbor1@gmail.com" className="hover:text-white transition">mtagbor1@gmail.com</a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Globe className="w-4 h-4 text-accent shrink-0" />
+                  <a href="https://wasscehometuition.netlify.app/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">wasscehometuition.netlify.app</a>
                 </li>
                 <li className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-accent shrink-0" />
