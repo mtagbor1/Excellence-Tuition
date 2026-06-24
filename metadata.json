@@ -1,0 +1,6 @@
+{
+  "name": "Excellence Tuition",
+  "description": "Premium 1-on-1 home tuition in Ghana for WASSCE Physics, Core Mathematics, and Elective Mathematics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
