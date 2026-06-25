@@ -89,6 +89,54 @@ export default function App() {
     }
   }, []);
 
+  // Handle smooth scroll for all hash links with sticky header offset
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest("a");
+      if (anchor) {
+        const href = anchor.getAttribute("href");
+        if (href && href.startsWith("#") && href.length > 1) {
+          const targetId = href.substring(1);
+          const element = document.getElementById(targetId);
+          if (element) {
+            e.preventDefault();
+            try {
+              const navBar = document.getElementById("navigation-bar");
+              const navHeight = navBar ? navBar.offsetHeight : 0;
+              const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+              const offsetPosition = elementPosition - navHeight;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+              });
+              
+              // Safely attempt to update history/hash without breaking on sandbox restrictions
+              try {
+                window.history.pushState(null, "", href);
+              } catch (historyError) {
+                // Fail silently if pushState is blocked by iframe security sandbox
+              }
+            } catch (scrollError) {
+              // Fallback to native scroll element if window.scrollTo fails
+              try {
+                element.scrollIntoView({ behavior: "smooth" });
+              } catch (fallbackError) {
+                console.error("Scroll fallback failed:", fallbackError);
+              }
+            }
+          }
+        }
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+    return () => {
+      document.removeEventListener("click", handleAnchorClick);
+    };
+  }, []);
+
   // Handle Quiz Answer Selection
   const handleQuizSelect = (field: string, value: string) => {
     setQuizAnswers(prev => ({ ...prev, [field]: value }));
