@@ -137,6 +137,41 @@ export default function App() {
     };
   }, []);
 
+  // Handle smooth scroll for mobile menu with collapse delay
+  const handleMobileMenuClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    
+    setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        try {
+          const navBar = document.getElementById("navigation-bar");
+          const navHeight = navBar ? navBar.offsetHeight : 0;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - navHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+          
+          try {
+            window.history.pushState(null, "", `#${targetId}`);
+          } catch (historyError) {
+            // Fail silently
+          }
+        } catch (scrollError) {
+          try {
+            element.scrollIntoView({ behavior: "smooth" });
+          } catch (fallbackError) {
+            console.error("Scroll fallback failed:", fallbackError);
+          }
+        }
+      }
+    }, 200);
+  };
+
   // Handle Quiz Answer Selection
   const handleQuizSelect = (field: string, value: string) => {
     setQuizAnswers(prev => ({ ...prev, [field]: value }));
@@ -387,35 +422,35 @@ export default function App() {
               <div className="px-4 pt-4 pb-6 space-y-3">
                 <a 
                   href="#services" 
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleMobileMenuClick(e, "services")}
                   className="block px-3 py-2.5 rounded-md text-base font-medium text-white hover:bg-blue-900/50 hover:text-accent"
                 >
                   Services
                 </a>
                 <a 
                   href="#about" 
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleMobileMenuClick(e, "about")}
                   className="block px-3 py-2.5 rounded-md text-base font-medium text-white hover:bg-blue-900/50 hover:text-accent"
                 >
                   Why Choose Me
                 </a>
                 <a 
                   href="#pasco" 
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleMobileMenuClick(e, "pasco")}
                   className="block px-3 py-2.5 rounded-md text-base font-medium text-white hover:bg-blue-900/50 hover:text-accent"
                 >
                   PASCO Masterclass
                 </a>
                 <a 
                   href="#methodology" 
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleMobileMenuClick(e, "methodology")}
                   className="block px-3 py-2.5 rounded-md text-base font-medium text-white hover:bg-blue-900/50 hover:text-accent"
                 >
                   Our Approach
                 </a>
                 <a 
                   href="#contact" 
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleMobileMenuClick(e, "contact")}
                   className="block px-3 py-2.5 rounded-md text-base font-medium text-white hover:bg-blue-900/50 hover:text-accent"
                 >
                   Contact Info
@@ -423,7 +458,7 @@ export default function App() {
                 <div className="pt-2">
                   <a 
                     href="#contact" 
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={(e) => handleMobileMenuClick(e, "contact")}
                     className="w-full inline-flex items-center justify-center py-3 bg-accent hover:bg-accent-hover text-primary font-bold rounded-lg shadow-md text-center text-base"
                   >
                     Book a Lesson

@@ -4,6 +4,153 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Google AI Studio App</title>
+    <script>
+      // Safeguard against sandbox/iframe environment errors
+      (function() {
+        // 1. Suppress security and property setter/getter errors from being reported
+        window.onerror = function(message, source, lineno, colno, error) {
+          const msg = String(message || "");
+          if (
+            msg.indexOf("Blocked a frame") !== -1 ||
+            msg.indexOf("cross-origin") !== -1 ||
+            msg.indexOf("fetch") !== -1 ||
+            msg.indexOf("getter") !== -1 ||
+            msg.indexOf("origin") !== -1
+          ) {
+            return true; // Prevent default browser error reporting
+          }
+        };
+
+        window.addEventListener("unhandledrejection", function(event) {
+          const reason = String(event.reason || "");
+          if (
+            reason.indexOf("Blocked a frame") !== -1 ||
+            reason.indexOf("cross-origin") !== -1 ||
+            reason.indexOf("origin") !== -1
+          ) {
+            event.preventDefault();
+          }
+        });
+
+        // 2. Make window.fetch configurable and writable
+        // This prevents "TypeError: Cannot set property fetch of #<Window> which has only a getter"
+        try {
+          let originalFetch = window.fetch;
+          Object.defineProperty(window, "fetch", {
+            get: function() {
+              return originalFetch;
+            },
+            set: function(val) {
+              originalFetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          console.warn("Could not redefine window.fetch:", e);
+        }
+
+        // 3. Proxy window.parent and window.top to safely handle cross-origin location and origin properties
+        try {
+          function createLocationProxy(originalLocation) {
+            try {
+              return new Proxy(originalLocation, {
+                get(target, prop) {
+                  try {
+                    const value = target[prop];
+                    if (typeof value === "function") {
+                      return value.bind(target);
+                    }
+                    return value;
+                  } catch (e) {
+                    try {
+                      const fallback = window.location[prop];
+                      if (typeof fallback === "function") {
+                        return fallback.bind(window.location);
+                      }
+                      return fallback;
+                    } catch (fallbackErr) {
+                      return undefined;
+                    }
+                  }
+                },
+                set(target, prop, value) {
+                  try {
+                    target[prop] = value;
+                    return true;
+                  } catch (e) {
+                    try {
+                      window.location[prop] = value;
+                      return true;
+                    } catch (fallbackErr) {
+                      return false;
+                    }
+                  }
+                }
+              });
+            } catch (e) {
+              return window.location;
+            }
+          }
+
+          function createWindowProxy(originalWindow) {
+            try {
+              return new Proxy(originalWindow, {
+                get(target, prop) {
+                  if (prop === "location") {
+                    try {
+                      return createLocationProxy(target.location);
+                    } catch (e) {
+                      return window.location;
+                    }
+                  }
+                  if (prop === "parent") {
+                    return window.parent;
+                  }
+                  if (prop === "top") {
+                    return window.top;
+                  }
+                  try {
+                    const val = target[prop];
+                    if (typeof val === "function") {
+                      return val.bind(target);
+                    }
+                    return val;
+                  } catch (e) {
+                    if (prop === "origin") {
+                      return window.location.origin;
+                    }
+                    return undefined;
+                  }
+                }
+              });
+            } catch (e) {
+              return window;
+            }
+          }
+
+          const originalParent = window.parent;
+          Object.defineProperty(window, "parent", {
+            get: function() {
+              if (originalParent === window) return window;
+              return createWindowProxy(originalParent);
+            },
+            configurable: true
+          });
+
+          const originalTop = window.top;
+          Object.defineProperty(window, "top", {
+            get: function() {
+              if (originalTop === window) return window;
+              return createWindowProxy(originalTop);
+            },
+            configurable: true
+          });
+        } catch (e) {
+          console.warn("Could not redefine window.parent or window.top:", e);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
